@@ -1,0 +1,7 @@
+Widget Summary (text):
+
+This widget should be able to produce the following text using TNUM:
+
+In YEAR, GEOGRAPHY had a population of TNUM1 people with a median age of TNUM2 and a median household income of TNUM3. Between YEAR-1 and YEAR the population of GEOGRAPHY changed from TNUM4 to TNUM5, and median household income changed from TNUM6 to TNUM7.
+The demographic breakdown of GEOGRAPHY is RACETNUMS and TNUM8 of the households in GEOGRAPHY speak a non-English language at home as their primary language.
+In YEAR, the median property value in GEOGRAPHY was TNUM9, and the homeownership rate was TNUM10. Most people in GEOGRAPHY TNUM11, and the average commute time was TNUM12.
