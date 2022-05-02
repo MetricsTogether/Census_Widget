@@ -94,7 +94,7 @@ yeargeog <- function(year,state,vars){
 
 ## fuction to start the cleaning/naming process (fips is pre-loaded from censusapi)
 fips_to_acs <- function(data){
-  t <- left_join(data,fips,by=c("state"="state_code","county"="county_code"))
+  t <- left_join(data,fips_codes,by=c("state"="state_code","county"="county_code"))
   t
 }
 

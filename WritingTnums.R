@@ -11,17 +11,29 @@ res <- read.csv("CSV files/residents_tract_2009-2019.csv")
 #}
 #foreach (i in 5:length(entry),.combine) %do# {tnumtext()}
 
-censustxt <- c(1:4339722)
+ageIL <- age_small %>% filter(state=="Illinois")
+
+censustxt <- c(1:31073)
 
 tnumtext <- function(data){
   foreach(i =(5:length(data)),.combine='c') %do% {
-    paste0("Population of ",names(data)[i]," in State ",data$state," in ",data$county , " in tract ", data$tract, " in year ", data$year, " is ",data[,i], " people")
+    #paste0("Population of ",names(data)[i]," in State ",data$state," in ",data$county , " in tract ", data$tract, " in year ", data$year, " is ",data[,i], " people")
+    
   }
 }
-censustxt <- tnumtext(age)
+censustxt <- tnumtext(ageIL)
 write(censustxt,"census_age.txt")
 
 
+library(tnum)
+library(jsonlite)
+creds <- "alison@metricstogether.com:brushfire"
+ip <- "metrics.truenum.com:8080"
+tnum.authorize(ip=ip,creds=creds)
+
+ageIL_2011 <- ageIL %>% filter(year==2011)
+
+tnum.ingestDataFrame(df=head(ageIL_2011),subjectRoot = "Illinois/",subjectTerms = list(c("","county"),c(":tract:", "tract")),tag="USFederal:ACS5:2011" )
 
 
 
