@@ -3,6 +3,7 @@ library(tidycensus)
 library(censusapi)
 library(jsonlite)
 library(foreach)
+library(tigris)
 
 ## Read in variable information from Census API for descriptions, codes, and labels -- only for 2019 assuming the most recent year has the largest number of variables associated for ACS
 acsvars2019 <- fromJSON("https://api.census.gov/data/2019/acs/acs5/variables.json")
@@ -17,7 +18,34 @@ rm(acsvars2019)
 names(var_desc) <- c("VariableCode","Label","Concept")
 
 #uni is the pulled universe of variables for all surveys, instances of time, and vintages from the Census API
+#this can be pulled using the following code or with a large csv (see google drive)
+#universe <- censusapi::listCensusApis()
+#^ for each uni pull all vars
+# universe <- censusapi::listCensusApis()
+# 
+# #Variable extraction does not work for pums data
+# pums <- grepl("pums",universe$name)
+# uni2 <- universe[pums==FALSE,]
+# 
+# 
+# vars <- c()
+# for (i in 1:length(uni2$title)){
+#   t <- makeVarlist(name=uni2$name[i],vintage = uni2$vintage[i],find="*")
+#   vars <- c(vars,list(t))
+# }
+# #did not run for line 86
+# 
+# 
+# vars3 <- c()
+# for (i in 87:800){
+#   t <- makeVarlist(name=uni2$name[i],vintage = uni2$vintage[i],find="*")
+#   vars3 <- c(vars,list(t))
+# }
+# uni <- rbind(vars,vars3)
+
 uni <- read.csv("universe.csv")
+
+
 key <-  "YOUR KEY"
 
 #key variables for round 1 census pull are 
@@ -50,7 +78,6 @@ acs5 <- left_join(acs5,var_desc,by=c("vars"="VariableCode"))
 ##because we use the 2019 variables, the resulting acs5 dataset has 246170 NA in the "label" category. Assuming these are for variables that we will not use right away, I'm comfortable not addressing this issue, but it should be on the radar to fix later
 
 var_freq <- acs5 %>% group_by(vars) %>% summarize(length(vars))
-
 ## function to retrieve acs years data
 yeargeog <- function(year,state,vars){
   data.frame(year = year, 
@@ -65,9 +92,9 @@ yeargeog <- function(year,state,vars){
   
 }
 
-## fuction to start the cleaning/naming process (fips_codes is pre-loaded from censusapi)
+## fuction to start the cleaning/naming process (fips is pre-loaded from censusapi)
 fips_to_acs <- function(data){
-  t <- left_join(data,fips_codes,by=c("state"="state_code","county"="county_code"))
+  t <- left_join(data,fips,by=c("state"="state_code","county"="county_code"))
   t
 }
 
