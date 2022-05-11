@@ -1,0 +1,11 @@
+year,state,county,tract,white alone,black alone,american indian or alaska native alone,asian alone,native hawaiian or pacific islander alone,some other race alone,two or more races,"white alone, not hispanic or latino","hispanic or latino, any race category"
+2011,New York,Monroe County,13702,3247,135,0,0,0,11,0,3001,257
+2015,Texas,Crane County,950100,2656,165,57,0,0,1779,73,1687,2838
+2018,Ohio,Allen County,11800,2055,159,0,66,0,53,85,2017,108
+2017,Michigan,Hillsdale County,50600,3532,31,12,37,0,6,34,3438,96
+2012,California,Nevada County,502,3995,37,54,55,0,268,138,3843,497
+2013,Arizona,Maricopa County,83000,5579,149,90,65,0,686,60,709,5622
+2014,West Virginia,Brooke County,31400,3873,41,0,0,0,0,4,3873,0
+2012,North Carolina,Mecklenburg County,5906,2835,582,0,410,0,91,64,2317,609
+2013,Texas,San Jacinto County,200101,5788,647,0,142,0,42,30,5385,464
+2014,California,Santa Clara County,512053,2923,325,0,796,0,631,251,1848,1859
